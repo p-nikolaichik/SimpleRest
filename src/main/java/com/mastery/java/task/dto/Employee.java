@@ -2,12 +2,9 @@ package com.mastery.java.task.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.Type;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 
@@ -20,6 +17,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee extends BaseEntity {
 
@@ -41,13 +39,14 @@ public class Employee extends BaseEntity {
 
     @JsonProperty("gender")
     @Column(name = "gender")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @JsonProperty("dateOfBirth")
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
-    public Employee(String firstName, String lastName, String departmentId, String jobTitle, String gender, String dateOfBirth) {
+    public Employee(String firstName, String lastName, String departmentId, String jobTitle, Gender gender, String dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentId = departmentId;

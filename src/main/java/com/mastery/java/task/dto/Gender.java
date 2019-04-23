@@ -1,6 +1,8 @@
 package com.mastery.java.task.dto;
 
-public enum Gender {
+import java.io.Serializable;
+
+public enum Gender implements Serializable {
     MALE,
     FEMALE
 }
